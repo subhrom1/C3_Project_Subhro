@@ -7,6 +7,8 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -18,7 +20,7 @@ class RestaurantTest {
     LocalTime closingTime = LocalTime.parse("22:00:00");
 
     @Spy
-    Restaurant restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);;
+    Restaurant restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
 
     @BeforeEach
     public void setUp() {
@@ -46,6 +48,17 @@ class RestaurantTest {
 
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>MENU<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void adding_item_to_menu_should_return_correct_order_value() {
+
+        List<String> itemsSelected = new ArrayList<>();
+        itemsSelected.add("Sweet corn soup");
+        itemsSelected.add("Vegetable lasagne");
+
+        assertEquals(388,restaurant.getOrderValue(itemsSelected));
+
+    }
     @Test
     public void adding_item_to_menu_should_increase_menu_size_by_1(){
         int initialMenuSize = restaurant.getMenu().size();
